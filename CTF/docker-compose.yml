@@ -1,0 +1,19 @@
+name: web-0x01
+services:
+  web-0x01:
+    container_name: web-0x01
+    build:
+      context: .
+      target: ${FLASK_ENV}-runner
+    env_file:
+      - ./.env.${FLASK_ENV}
+    ports:
+      - "3001:3001"
+    stop_grace_period: 0s
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /app/src
+        - action: rebuild
+          path: ./requirements.txt
