@@ -1,0 +1,11 @@
+**/coverage/
+**/dist/
+**/node_modules/
+**/npm-debug.log
+**/.git
+**/.vscode
+**/*.env.*
+**/*.log
+**/*.md
+**/*.yml
+**/*.yaml

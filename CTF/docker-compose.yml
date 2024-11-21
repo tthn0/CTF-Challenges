@@ -1,0 +1,12 @@
+name: web-0x00
+services:
+  web-0x00:
+    container_name: web-0x00
+    env_file: .env.${ENV}
+    build:
+      context: .
+      target: ${ENV}-runner
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/app/src
