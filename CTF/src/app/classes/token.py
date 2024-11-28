@@ -11,6 +11,7 @@ from .config import Config
 class Token:
     KEY: str = Config.SECRET_KEY
     ALGORITHM: str = "HS256"
+    JWT_EXPIRATION_SECONDS: int = 60 * 60
 
     class STATUS(Enum):
         PRIVILEGED = auto()
@@ -23,7 +24,8 @@ class Token:
             payload={
                 "privileged": privileged,
                 "iat": datetime.now(timezone.utc),
-                "exp": datetime.now(timezone.utc) + timedelta(hours=1),
+                "exp": datetime.now(timezone.utc)
+                + timedelta(seconds=Token.JWT_EXPIRATION_SECONDS),
             },
             key=Token.KEY,
             algorithm=Token.ALGORITHM,
@@ -35,7 +37,7 @@ class Token:
         res.set_cookie(
             key="token",
             value=Token._create(privileged),
-            max_age=3600,
+            max_age=Token.JWT_EXPIRATION_SECONDS,
             httponly=True,
             samesite="Strict",
         )

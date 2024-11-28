@@ -8,6 +8,7 @@ elif [ "$1" -eq 1 ]; then
   docker compose down --volumes --remove-orphans
 elif [ "$1" -eq 2 ]; then
   export FLASK_ENV=production
+  chmod -R a+w ./log
   docker compose up --build -d
 else
   echo "Invalid argument."

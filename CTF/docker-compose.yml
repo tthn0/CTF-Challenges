@@ -2,6 +2,7 @@ name: web-0x01
 services:
   web-0x01:
     container_name: web-0x01
+    stop_grace_period: 0s
     build:
       context: .
       target: ${FLASK_ENV}-runner
@@ -9,7 +10,8 @@ services:
       - ./.env.${FLASK_ENV}
     ports:
       - "3001:3001"
-    stop_grace_period: 0s
+    volumes:
+      - ./log:/app/log
     develop:
       watch:
         - action: sync
