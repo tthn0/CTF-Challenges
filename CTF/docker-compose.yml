@@ -2,11 +2,20 @@ name: web-0x00
 services:
   web-0x00:
     container_name: web-0x00
-    env_file: .env.${ENV}
+    stop_grace_period: 0s
     build:
       context: .
-      target: ${ENV}-runner
+      target: ${NODE_ENV}-runner
+    env_file:
+      - .env.${NODE_ENV}
     ports:
       - 3000:3000
     volumes:
-      - ./src:/app/src
+      - ./log:/app/log
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /app/src
+        - action: rebuild
+          path: ./package.json

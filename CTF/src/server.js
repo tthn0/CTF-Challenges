@@ -1,34 +1,12 @@
 import express from "express";
 import { Admin } from "./admin.js";
-import { User } from "./user.js";
 import { PORT } from "./environmentVariables.js";
+import { logRequest } from "./logRequest.js";
+import { User } from "./user.js";
 
 const app = express();
 app.use(express.json());
-
-const logger = (req, res, next) => {
-  const date = new Intl.DateTimeFormat("en-US", {
-    timeZone: "America/Chicago",
-    weekday: "short",
-    month: "short",
-    day: "2-digit",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  }).format(new Date());
-  console.log(`${date}`);
-  console.log(`\t${req.ip}`);
-  console.log(`\t${req.method} ${req.originalUrl}`);
-  console.log(`\t${JSON.stringify(req.body)}`);
-  next();
-};
-
-app.use(logger);
-
-app.get("/", (req, res) => {
-  res.end("Please send a POST request to `/user` or `/admin`.");
-});
+app.use(logRequest);
 
 app.post("/user", (req, res) => {
   const user = new User(req.body);

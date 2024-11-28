@@ -10,42 +10,34 @@
 
 Something seems off with the account authentication system. Non-admin users are reporting strange messages, and the admin dashboard remains locked. Can you investigate the odd behavior and retrieve the hidden flag without triggering the system’s safeguards?
 
-## 🌐 Hosting and Deployment
+## 🌐 Hosting
+
+> [!NOTE]
+>
+> - A docker installation is required to run this challenge.
+> - Additionally, `sudo` might be required to run the commands if you're on Linux.
 
 Create a clone of this branch and `cd` into the project directory. Follow the commands below to start the application, depending on how you want to run it.
 
-### 💻 Development (No Docker)
-
-Ideal for local development without Docker.
+### 🛠️ Development
 
 ```bash
 cd CTF
 sh start.sh 1
 ```
 
-### 🐳 Development (Docker)
-
-Ideal for local development with Docker.
-
-```bash
-cd CTF
-sh start.sh 2
-```
-
 ### 🚀 Production
-
-This is how the live application will be deployed.
 
 > [!IMPORTANT]
 > Follow these steps before starting:
 >
 > 1. Duplicate `CTF/.env.development`.
-> 2. Rename the duplicate to `CTF/.env.production`.
-> 3. Update the environment variables in `CTF/.env.production` appropriately.
+> 2. Rename the duplicate to `.env.production`.
+> 3. Update the environment variables appropriately.
 
 ```bash
 cd CTF
-sh start.sh 3
+sh start.sh 2
 ```
 
 <section>
